@@ -313,7 +313,14 @@ int BinarySearchTreeX<Comparable>::height() const
 template <class Comparable>
 int BinarySearchTreeX<Comparable>::height(BinaryNodeX<Comparable> *t) const
 {
-  return 0;  // to be written by student
+  int l = 0, r = 0;
+  if(t && t->left)
+    l = height(t->left) + 1;
+  if(t && t->right)
+    r = height(t->right) + 1;
+  if(l < r)
+    return r;
+  return l;
 }
 
 template <class Comparable>
@@ -332,7 +339,6 @@ int BinarySearchTreeX<Comparable>::sum(BinaryNodeX<Comparable> *t) const
   if(t && t->right)
     temp += sum(t->right);
   return temp + t->element;
-  //return 0; // to be written by student
 }
 
 template <class Comparable>
@@ -340,7 +346,15 @@ bool BinarySearchTreeX<Comparable>::isAncestor(const Comparable & x,
   const Comparable & possibleAncestor) const
 
 {
-  return true;  // to be written by student
+  BinaryNodeX<Comparable> *temp = find(possibleAncestor, root);
+  while( temp != NULL )
+      if( x < temp->element )
+          temp = temp->left;
+      else if( temp->element < x )
+          temp = temp->right;
+      else
+          return true;    // Match
+  return false;
 }
 
 
@@ -354,7 +368,17 @@ int BinarySearchTreeX<Comparable>::highestFull() const
 template <class Comparable>
 int BinarySearchTreeX<Comparable>::highestFull(BinaryNodeX<Comparable> *t) const
 {
-  return 0;  // to be written by student
+  int left = 0, right = 0;
+  if(t && t->left && t->right)
+  {
+    left = highestFull(t->left) + 1;
+    right = highestFull(t->right) + 1;
+    //cout << left << ' ' << right << endl;
+    if(left < right)
+      return left;
+    return right;
+  }
+  return 1;  // to be written by student
 }
 
 template <class Comparable>
