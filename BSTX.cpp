@@ -24,7 +24,7 @@ template <class Comparable>
 BinarySearchTreeX<Comparable>::
 BinarySearchTreeX( const BinarySearchTreeX<Comparable> & rhs ) :
   root( NULL ), ITEM_NOT_FOUND( rhs.ITEM_NOT_FOUND )
-{ 
+{
     *this = rhs;
 }
 
@@ -326,7 +326,13 @@ int BinarySearchTreeX<Comparable>::sum() const
 template <class Comparable>
 int BinarySearchTreeX<Comparable>::sum(BinaryNodeX<Comparable> *t) const
 {
-  return 0; // to be written by student
+  int temp = 0;
+  if(t && t->left)
+    temp += sum(t->left);
+  if(t && t->right)
+    temp += sum(t->right);
+  return temp + t->element;
+  //return 0; // to be written by student
 }
 
 template <class Comparable>
@@ -362,5 +368,3 @@ int BinarySearchTreeX<Comparable>::deepestFull(BinaryNodeX<Comparable> *t) const
 {
   return 0;  // to be written by student
 }
-
-
